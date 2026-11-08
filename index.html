@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#5b4bdb"><meta name="description" content="AI Earning Hub - free AI prompts and creator tools">
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>AI Earning Hub</title>
+<style>
+:root{--p:#5b4bdb;--bg:#f6f7fb;--ink:#20223a}*{box-sizing:border-box}body{margin:0;font-family:system-ui,Arial,sans-serif;background:var(--bg);color:var(--ink)}header{background:linear-gradient(130deg,#5142c7,#8b5cf6);color:white;padding:28px 18px 34px;border-radius:0 0 26px 26px}header h1{margin:0 0 8px;font-size:27px}header p{margin:0;opacity:.92}.wrap{max-width:760px;margin:auto;padding:16px}.notice{background:#fff8e7;border:1px solid #f3d58b;padding:12px;border-radius:12px;font-size:13px;line-height:1.5;margin:14px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:white;border:1px solid #e8e8f1;border-radius:16px;padding:16px;box-shadow:0 3px 12px #20223a08}.card h3{font-size:16px;margin:0 0 6px}.card p{font-size:13px;color:#65677a;margin:0 0 12px}.tag{font-size:11px;color:var(--p);font-weight:700}.btn{display:inline-block;border:0;border-radius:10px;background:var(--p);color:white;padding:11px 14px;font-weight:650;text-decoration:none;cursor:pointer}.btn.light{background:#efedff;color:var(--p)}section{margin:22px 0}h2{font-size:19px}label{display:block;font-weight:600;font-size:14px;margin:12px 0 6px}input,textarea,select{width:100%;padding:12px;border:1px solid #d9d9e6;border-radius:10px;font:inherit;background:white}textarea{min-height:100px}#result{white-space:pre-wrap;background:#f4f2ff;border-radius:10px;padding:12px;min-height:70px;margin:12px 0;font-size:14px}.links a{display:inline-block;margin:5px 6px 5px 0}.foot{text-align:center;color:#777;font-size:12px;padding:24px 8px}@media(max-width:430px){.grid{grid-template-columns:1fr}header h1{font-size:24px}}
+</style></head>
+<body>
+<header><div class="wrap"><div class="tag" style="color:#e6e1ff">FREE CREATOR TOOLKIT</div><h1>✨ AI Earning Hub</h1><p>Smart prompts and useful tools for creators. Start free, learn step by step.</p></div></header>
+<main class="wrap">
+<div class="notice"><b>Important:</b> This starter site creates writing prompts and templates; it does not include a paid AI API. For AI-generated answers, copy a prompt and open ChatGPT or Gemini. Never promise guaranteed earnings.</div>
+<section><h2>🧰 Creator Prompt Tools</h2><div class="grid">
+<div class="card"><h3>Instagram Caption</h3><p>Generate a ready-to-use AI prompt for a post.</p><button class="btn" onclick="makePrompt('caption')">Open tool</button></div>
+<div class="card"><h3>YouTube Titles</h3><p>Create title ideas for your video topic.</p><button class="btn" onclick="makePrompt('youtube')">Open tool</button></div>
+<div class="card"><h3>Instagram Bio</h3><p>Build a prompt for a clear profile bio.</p><button class="btn" onclick="makePrompt('bio')">Open tool</button></div>
+<div class="card"><h3>Hashtag Ideas</h3><p>Ask AI for relevant niche hashtags.</p><button class="btn" onclick="makePrompt('hashtags')">Open tool</button></div>
+</div></section>
+<section id="generator" class="card"><h2>✍️ Prompt Generator</h2><label for="topic">अपना topic लिखें</label><input id="topic" placeholder="जैसे: affordable kurti fashion"><label for="platform">Platform</label><select id="platform"><option>Instagram</option><option>YouTube</option><option>Facebook</option><option>Pinterest</option></select><div style="margin-top:14px"><button class="btn" onclick="buildPrompt()">Generate prompt</button></div><div id="result">आपका prompt यहाँ दिखाई देगा।</div><button class="btn light" onclick="copyPrompt()">Copy prompt</button></section>
+<section><h2>🤖 Free AI Websites</h2><div class="card links"><a class="btn" href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT</a><a class="btn" href="https://gemini.google.com/" target="_blank" rel="noopener">Google Gemini</a><a class="btn" href="https://www.canva.com/" target="_blank" rel="noopener">Canva</a></div></section>
+<section><h2>💡 Learn & Earn</h2><div class="card"><p>Learn content creation, thumbnails, captions, and digital products. Start by building useful samples and finding clients. Income is not guaranteed.</p><a class="btn light" href="https://www.youtube.com/" target="_blank" rel="noopener">Learn on YouTube</a></div></section>
+<div class="foot">© 2026 AI Earning Hub · Made for learning · Add your contact and privacy details before public promotion.</div>
+</main>
+<script>
+let selected='caption';
+function makePrompt(type){selected=type;document.getElementById('generator').scrollIntoView({behavior:'smooth'});document.getElementById('platform').value=type==='youtube'?'YouTube':'Instagram';document.getElementById('topic').focus()}
+function buildPrompt(){const t=document.getElementById('topic').value.trim();const p=document.getElementById('platform').value;if(!t){document.getElementById('result').textContent='पहले अपना topic लिखें।';return}
+let task={caption:'Write 3 engaging captions with a natural hook and a clear call to action',youtube:'Suggest 10 clickable but honest YouTube video titles',bio:'Write 5 concise, clear and trustworthy profile bios',hashtags:'Suggest 15 relevant niche hashtags, avoiding misleading or banned tags'}[selected];
+document.getElementById('result').textContent=`Act as an experienced ${p} content creator. ${task} about: "${t}". Use simple language, avoid false claims, and tailor it to beginners.`;
+}
+function copyPrompt(){const s=document.getElementById('result').textContent;if(!s||s.includes('यहाँ दिखाई'))return;navigator.clipboard?.writeText(s).then(()=>alert('Prompt copied!')).catch(()=>alert('Text select karke copy karein.'))}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+</script></body></html>
